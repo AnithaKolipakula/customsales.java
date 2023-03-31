@@ -1,0 +1,59 @@
+import java.util.HashSet;
+import java.util.Set;
+
+class Sale {
+    private String productName;
+    private double price;
+
+    public Sale(String productName, double price) {
+        this.productName = productName;
+        this.price = price;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Sale)) {
+            return false;
+        }
+        Sale sale = (Sale) obj;
+        return productName.equals(sale.productName);
+    }
+
+    @Override
+    public int hashCode() {
+        return productName.hashCode();
+    }
+}
+
+public class customsales {
+    public static void main(String[] args) {
+        Set<Sale> saleSet = new HashSet<>();
+        saleSet.add(new Sale("Tea", 2.50));
+        saleSet.add(new Sale("Coffee", 3.00));
+        saleSet.add(new Sale("Cake", 4.50));
+
+        System.out.println("Before removing Tea:");
+        for (Sale sale : saleSet) {
+            System.out.println(sale.getProductName() + " - " + sale.getPrice());
+        }
+
+        Sale teaSale = new Sale("Tea", 2.50);
+        saleSet.remove(teaSale);
+
+        System.out.println("\nAfter removing Tea:");
+        for (Sale sale : saleSet) {
+            System.out.println(sale.getProductName() + " - " + sale.getPrice());
+        }
+    }
+}
